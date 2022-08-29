@@ -14,11 +14,13 @@ contract MCSToken is ERC20, Ownable {
 contract VoteFactory {
   address public owner;
 
-  Event ContractCreate (address indexed addressContract, string description, uint durationTime);
+  event ContractCreate (address indexed addressContract, string description, uint durationTime); //was a mistake 
 
   Vote[] public votes;
+
   mapping(address => bool) existingVotes;
-  ERC20 public votingToken;
+
+  ERC20 public votingToken; //inferit from ERC20 token
 
   constructor(ERC20 _votingToken) {
     owner = msg.sender;
@@ -46,9 +48,11 @@ contract VoteFactory {
     votingToken.transfer(receiver, currentBalance);
   }
   
-  function onVotingEnded() external {
-    require(existingVotes[msg.sender], "Not existing voting!");
-    // TODO: как лучше сообщить о статусе голосования (прошло, не прошло, не состоялось)
+  // VoteFactory
+  function onVotingEnded(uint8 _whichVote) external view returns(uint){
+    //require(existingVotes[msg.sender], "Not existing voting!"); // who is msg.sender in this case?? child sc?
+        //require(existingVotes(votes[_whichVote]), "Not existing voting!"); //here i want to check if child sc Vote exist or not
+    return uint(votes[_whichVote].checkCurrRes()); //convert enum to uint
   }
 }
 
@@ -63,7 +67,8 @@ contract Vote {
   uint public votesFor;
   uint public votesAgainst;
 
-  enum Result {Rejected, Accepted, Failed};
+  enum Result {Election, Rejected, Accepted, Failed}
+  
   Result public resultOfVoting;
   bool public isVotingStopped;
 
@@ -115,9 +120,10 @@ contract Vote {
         parent.votingToken().transfer(voters[i], 1);
       }
     }
-    parent.onVotingEnded(resultOfVoting);
+    //parent.onVotingEnded(resultOfVoting);
   }
-  
-  //todo 
+  function checkCurrRes()public view returns(Result){
+    return resultOfVoting; //enum
+  }
 }
 
