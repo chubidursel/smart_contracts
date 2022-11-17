@@ -4,7 +4,8 @@ pragma solidity ^0.8.0;
 import "./IERC721Metadata.sol";
 
 contract GuideDAOAccessToken is IERC721Metadata {
-    
+
+    // different collections for different programm
     struct Collection {
         uint256 startIndex;
         uint256 endIndex;
@@ -73,7 +74,7 @@ contract GuideDAOAccessToken is IERC721Metadata {
         for (uint256 i = 0; i < collections.length; i++) {
             if (
                 tokenId >= collections[i].startIndex &&
-                tokenId <= collections[i].endIndex
+                tokenId <= collections[i].endIndex //limmited amount of NFT
             ) {
                 return
                     string(
@@ -81,7 +82,7 @@ contract GuideDAOAccessToken is IERC721Metadata {
                     );
             }
         }
-        return _baseURI;
+        return _baseURI; //Just in case
     }
 
     function balanceOf(address owner)
