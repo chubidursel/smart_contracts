@@ -13,3 +13,6 @@ function comareStr(string calldata a, string calldata b) public pure returns (bo
 }
 }
 
+// useful website 
+// https://fravoll.github.io/solidity-patterns/
+
