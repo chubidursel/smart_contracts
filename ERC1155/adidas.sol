@@ -9,8 +9,8 @@ import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-import './AbstractERC1155Factory.sol';
-import "./PaymentSplitter.sol";
+// import './AbstractERC1155Factory.sol';
+// import "./PaymentSplitter.sol";
 
 /*
 * @title ERC1155 token for Adidas cards
