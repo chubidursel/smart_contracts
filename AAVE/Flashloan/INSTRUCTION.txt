@@ -1,0 +1,32 @@
+This is a simple Implementation of FlashLoan via AAVE
+
+How does it work?
+1. MyContract (aka client sc) has function that inherite funds from AAVE pool
+
+2. Client request some fonds (simple if just one type of token) FUNC>> requestFlashLoan()
+
+3. AAVE send this funds to client, and call this FUNC>>  executeOperation() which has all custom logic to executeOperation
+
+4. within this logic from last func we can use some funds (for Arbitrage or SelfLiqudation etc)
+
+5. After exetute all logic it returns func back to AAVe pool with fees
+
+
+RESOURSES:
+
+https://www.youtube.com/watch?v=PtMs8FZJhkU
+
+ADDRESSES: 
+
+DAI-TestnetMintableERC20-Aave token (Goerli):
+0xDF1742fE5b0bFc12331D8EAec6b478DfDbD31464
+
+USDC-TestnetMintableERC20-Aave token(Goerli):
+0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43
+
+AAVE PoolAddressProvider (Goerli):
+0x5E52dEc931FFb32f609681B8438A51c675cc232d
+
+---------------
+0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43,1000000000 // 1,000 USDC
+0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43,1000000   // 1 USDC
